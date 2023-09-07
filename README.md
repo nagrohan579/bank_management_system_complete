@@ -19,6 +19,7 @@ If you are looking for the basic version of this project, you can find it in the
 
 ### 1. **Account Management**
    - **Create Account**: Easily create new bank accounts with customer information.
+   - **Login to Account**: Login to your account using username and password.
    - **Update Account**: Update customer details and account information.
    - **Delete Account**: Safely delete customer accounts when needed.
 
@@ -93,7 +94,7 @@ This project was created by:
       <a href="https://github.com/nagrohan579">Rohan Nag</a>
    </div>
    <div style="text-align:center;">
-      <img src="url-to-cocreator-picture" alt="Ronita Adhikari" width="100" height="100">
+      <img src="images/Ronita_Adhikari_image.jpg" alt="Ronita Adhikari" width="100" height="100">
       <br>
       <a href="https://github.com/ronitaadhikari">Ronita Adhikari</a>
    </div>
