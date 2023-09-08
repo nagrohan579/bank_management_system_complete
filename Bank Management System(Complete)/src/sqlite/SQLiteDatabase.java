@@ -111,6 +111,25 @@ public class SQLiteDatabase {
         }
     }
 
+    public boolean validatePassword(String username, String password) throws SQLException {
+        String query = "SELECT * FROM " + tableName + " " + "WHERE username=?";
+        PreparedStatement st = con.prepareStatement(query);
+        st.setString(1, username);
+        ResultSet rs = st.executeQuery();
+
+        if (rs.next()) {
+            if (rs.getString("password").equals(password)) {
+                return true;
+            } else {
+                System.out.println("Invalid password!");
+                return false;
+            }
+        }
+
+        System.out.println("Invalid username!");
+        return false;
+    }
+
     public void close() throws SQLException {
         con.close();
     }
