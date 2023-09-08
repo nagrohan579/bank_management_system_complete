@@ -72,6 +72,21 @@ public class SQLiteDatabase {
         }
     }
 
+    public void insertData(int id, String name, String username, String password) throws SQLException {
+        String query = String.format("INSERT INTO %s VALUES(?,?,?,?)", tableName);
+        PreparedStatement p = con.prepareStatement(query);
+        p.setInt(1, id);
+        p.setString(2, name);
+        p.setString(3, username);
+        p.setString(4, password);
+
+        int count = p.executeUpdate();
+
+        System.out.println(String.format("%d row(s) added sucessfully", count));
+
+        p.close();
+    }
+
     public void close() throws SQLException {
         con.close();
     }
