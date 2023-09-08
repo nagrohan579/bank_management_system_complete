@@ -49,37 +49,34 @@ If you are looking for the basic version of this project, you can find it in the
 
 ### Installation
 
-1. Clone the repository:
+Follow these steps to run the Bank Management System JAR file included in this repository:
 
-   ```sh
-   git clone https://github.com/nagrohan579/bank_management_system_complete.git
-   ```
-2. Locate the Java source file: 
-    ```sh
-    cd 'Bank Management System(Complete)'
-    ```
-    ```sh
-    cd src
-    ```
-    ```sh
-    cd app
-    ```
+1. **Download the Repository**:
+   - Clone or download this repository to your local machine.
 
-3. Compile the Java source file:
+2. **Navigate to the 'dist' Directory**:
+   - Open a terminal or command prompt.
+   - Change your current directory to the 'dist' directory of the project using the `cd` command:
+     ```sh
+     cd 'Bank Management System(Complete)'\dist\
+     ```
 
-    ```sh
-    javac BankManagementSystem.java
-    ```
+3. **Run the JAR File**:
+   - Use the `java` command to run the JAR file. Make sure you have Java installed on your machine.
+     ```sh
+     java -jar BankManagementSystem.jar
+     ```
 
-## Usage
+4. **Follow the On-Screen Instructions**:
+   - The Bank Management System application should start. Follow the on-screen instructions to interact with the system.
 
-1. Open a terminal and navigate to the project directory.
+5. **Provide Database Path (if required)**:
+   - If the application prompts for a database path, ensure you provide the correct path to the SQLite database file.
 
-2. Run the compiled Java program:
-    ```sh
-    java BankManagementSystem
-    ```
-3. Follow the on-screen instructions to interact with the Bank Management System.
+6. **Enjoy Using the Bank Management System**:
+   - You can now use the Bank Management System to access your account, make transactions, and more.
+
+That's it! You should now have the Bank Management System up and running on your machine.
 
 ## Creators
 
