@@ -85,8 +85,6 @@ If you are looking for the basic version of this project, you can find it in the
 
 This project was created by:
 
-
-
 <div style="display:flex; justify-content:left; align-items:center; text-align:center;">
    <div style="text-align:center; margin-right:20px;">
       <img src="images/Rohan_Nag_image.jpeg" alt="Rohan Nag" width="100" height="100">
