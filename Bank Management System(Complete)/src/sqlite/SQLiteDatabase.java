@@ -87,6 +87,30 @@ public class SQLiteDatabase {
         p.close();
     }
 
+    public void readData() throws SQLException {
+        String query = String.format("SELECT * FROM %s", tableName);
+        Formatter formatter = new Formatter();
+
+        try (Statement st = con.createStatement(); 
+             ResultSet rs = st.executeQuery(query)) {
+
+            formatter.format("%-5s %-25s %-25s %-25s\n", "id", "name", "username", "password");
+
+        while(rs.next())
+        {
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            String username = rs.getString(3);
+            String password = rs.getString(4);
+            
+            formatter.format("%-5s %-25s %-25s %-25s\n", id,name,username, password);
+//            System.out.println(String.format("%d \t\t %s \t\t %s \t\t %s", id, name, username, password));
+        }
+            System.out.println(formatter);
+
+        }
+    }
+
     public void close() throws SQLException {
         con.close();
     }
