@@ -84,12 +84,12 @@ This project was created by:
 
 <div style="display:flex; justify-content:left; align-items:center; text-align:center;">
    <div style="text-align:center; margin-right:20px;">
-      <img src="images/Rohan_Nag_image.jpeg" alt="Rohan Nag" width="100" height="100">
+      <img src="https://onedrive.live.com/embed?resid=8B8A72DBCDA64182%21112061&authkey=%21AOyHtHLWLIbFqSw&width=256" alt="Rohan Nag" width="100" height="100">
       <br>
       <a href="https://github.com/nagrohan579">Rohan Nag</a>
    </div>
    <div style="text-align:center;">
-      <img src="images/Ronita_Adhikari_image.jpg" alt="Ronita Adhikari" width="100" height="100">
+      <img src="https://onedrive.live.com/embed?resid=8B8A72DBCDA64182%21112062&authkey=%21AKyrrRemQ8zBS9w&width=256" alt="Ronita Adhikari" width="100" height="100">
       <br>
       <a href="https://github.com/ronitaadhikari">Ronita Adhikari</a>
    </div>
