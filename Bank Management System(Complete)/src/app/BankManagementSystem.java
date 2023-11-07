@@ -14,7 +14,8 @@ package app;
 public class BankManagementSystem {
     public static void main(String[] args) {
         
-        Login ob = new Login();
+//        Login ob = new Login();
+          SignUp ob1 = new SignUp();
         
         
         
