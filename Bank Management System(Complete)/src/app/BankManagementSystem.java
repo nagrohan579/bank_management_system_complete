@@ -17,7 +17,7 @@ public class BankManagementSystem {
 //        Login ob = new Login();
 //          SignUp ob1 = new SignUp();
           Form_1 ob2 = new Form_1();
-        
+//          Form_2 ob3 = new Form_2();
         
         
         
