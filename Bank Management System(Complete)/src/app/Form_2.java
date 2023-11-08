@@ -61,6 +61,11 @@ public class Form_2 extends JFrame {
         label_pan.setFont(new Font("Raleway",Font.BOLD,25));
         add(label_pan);
         
+        JTextField text_pan = new JTextField();
+        text_pan.setBounds(350, 230, 400, 30);
+        text_pan.setFont(new Font("Raleway",Font.PLAIN,19));
+        add(text_pan);
+        
         
         
         
