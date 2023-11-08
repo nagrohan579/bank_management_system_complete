@@ -39,7 +39,11 @@ public class Form_2 extends JFrame {
         label_category.setFont(new Font("Raleway",Font.BOLD,25));
         add(label_category);
         
-        
+        String[] category = {"General","SC","ST","OBC","Other"};
+        JComboBox category_combo=new JComboBox(category);
+        category_combo.setBounds(350,110,400,30);
+        category_combo.setFont(new Font("Raleway",Font.PLAIN,20));
+        add(category_combo);
         
         
         
