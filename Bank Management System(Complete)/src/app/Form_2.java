@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 //import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -49,6 +50,11 @@ public class Form_2 extends JFrame {
         label_Occupation.setBounds(100,160,300,50);
         label_Occupation.setFont(new Font("Raleway",Font.BOLD,25));
         add(label_Occupation);
+        
+        JTextField text_occupation = new JTextField();
+        text_occupation.setBounds(350, 170, 400, 30);
+        text_occupation.setFont(new Font("Raleway",Font.PLAIN,19));
+        add(text_occupation);
         
         
         
