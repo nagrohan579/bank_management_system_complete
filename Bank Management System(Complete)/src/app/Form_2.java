@@ -4,11 +4,13 @@
  */
 package app;
 
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-//import javax.swing.JButton;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -19,8 +21,8 @@ import javax.swing.JTextField;
  * @author Ronita Adhikari
  */
 public class Form_2 extends JFrame {
-//    JButton button1 = new JButton();
-//    JButton button2 = new JButton();
+    JButton button1 = new JButton();
+    JButton button2 = new JButton();
     
     Form_2()
     {
@@ -121,8 +123,24 @@ public class Form_2 extends JFrame {
         checkBox.setFont(new Font("Raleway",Font.PLAIN,17));
         add(checkBox);
         
+        button1 = new JButton("Submit");
+        button1.setFont(new Font("Arial",Font.BOLD,16));
+        button1.setForeground(Color.WHITE);
+        button1.setBackground(Color.BLACK);
+        button1.setBounds(210, 600, 100, 40);
+        button1.setFocusable(false);
+//        button1.addActionListener(this);
+        add(button1);
         
         
+        button2 = new JButton("Cancel");
+        button2.setFont(new Font("Arial",Font.BOLD,16));
+        button2.setForeground(Color.WHITE);
+        button2.setBackground(Color.BLACK);
+        button2.setBounds(540, 600, 100, 40);
+        button2.setFocusable(false);
+//        button1.addActionListener(this);
+        add(button2);
         
         
         
