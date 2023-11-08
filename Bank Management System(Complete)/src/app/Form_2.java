@@ -45,6 +45,11 @@ public class Form_2 extends JFrame {
         category_combo.setFont(new Font("Raleway",Font.PLAIN,20));
         add(category_combo);
         
+        JLabel label_Occupation = new JLabel("Occupation");
+        label_Occupation.setBounds(100,160,300,50);
+        label_Occupation.setFont(new Font("Raleway",Font.BOLD,25));
+        add(label_Occupation);
+        
         
         
         
