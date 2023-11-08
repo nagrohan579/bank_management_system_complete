@@ -15,7 +15,8 @@ public class BankManagementSystem {
     public static void main(String[] args) {
         
 //        Login ob = new Login();
-          SignUp ob1 = new SignUp();
+//          SignUp ob1 = new SignUp();
+          Form_1 ob2 = new Form_1();
         
         
         
