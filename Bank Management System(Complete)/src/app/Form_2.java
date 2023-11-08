@@ -76,6 +76,11 @@ public class Form_2 extends JFrame {
         text_adhar.setFont(new Font("Raleway",Font.PLAIN,19));
         add(text_adhar);
         
+        JLabel label_account = new JLabel("Account Type");
+        label_account.setBounds(100,340,300,50);
+        label_account.setFont(new Font("Raleway",Font.BOLD,25));
+        add(label_account);
+        
         
         
         
