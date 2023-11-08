@@ -56,6 +56,11 @@ public class Form_2 extends JFrame {
         text_occupation.setFont(new Font("Raleway",Font.PLAIN,19));
         add(text_occupation);
         
+        JLabel label_pan = new JLabel("PAN Number");
+        label_pan.setBounds(100,220,300,50);
+        label_pan.setFont(new Font("Raleway",Font.BOLD,25));
+        add(label_pan);
+        
         
         
         
