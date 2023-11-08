@@ -4,6 +4,7 @@
  */
 package app;
 
+import MySQL.MySQLDatabase;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +13,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,13 +32,18 @@ import javax.swing.JTextField;
  *
  * @author Ronita Adhikari
  */
-public class SignUp extends JFrame{
+public class SignUp extends JFrame implements ActionListener{
     ImageIcon i1 ;
     Image i2;
     ImageIcon i3;
     JLabel label1;
     JPanel panel1;
     JPanel panel2;
+    JTextField Email_text_field;
+    JPasswordField password_text_field;
+    JTextField Username_text_field;
+    JTextField FullName_text_field;
+    JButton signUp_button;
     
     SignUp()
     {
@@ -60,7 +73,7 @@ public class SignUp extends JFrame{
         FullName_Label.setFont(new Font("AvantGrade",Font.PLAIN,20));
 //        panel2.add(SignUp_Label2);
         
-        JTextField FullName_text_field=new JTextField(15);
+        FullName_text_field=new JTextField(15);
         FullName_text_field.setMinimumSize(new Dimension(200, 25));
         FullName_text_field.setFont(new Font("AvantGrade",Font.PLAIN,16));
 //        panel2.add(signUp_text_field);
@@ -70,7 +83,7 @@ public class SignUp extends JFrame{
         Email_Label.setFont(new Font("AvantGrade",Font.PLAIN,20));
 //        panel2.add(SignUp_Label2);
         
-        JTextField Email_text_field=new JTextField(30);
+        Email_text_field=new JTextField(30);
         Email_text_field.setMinimumSize(new Dimension(200, 25));
         Email_text_field.setFont(new Font("AvantGrade",Font.PLAIN,16));
         
@@ -79,7 +92,7 @@ public class SignUp extends JFrame{
         UserName_Label.setFont(new Font("AvantGrade",Font.PLAIN,20));
 //        panel2.add(SignUp_Label2);
         
-        JTextField Username_text_field=new JTextField(30);
+        Username_text_field=new JTextField(30);
         Username_text_field.setMinimumSize(new Dimension(200, 25));
         Username_text_field.setFont(new Font("AvantGrade",Font.PLAIN,16));
         
@@ -88,15 +101,17 @@ public class SignUp extends JFrame{
         password_Label.setFont(new Font("AvantGrade",Font.PLAIN,20));
 //        panel2.add(SignUp_Label2);
         
-        JPasswordField password_text_field = new JPasswordField(30);
+        password_text_field = new JPasswordField(30);
         password_text_field.setMinimumSize(new Dimension(200, 25));
         password_text_field.setFont(new Font("AvantGrade",Font.PLAIN,16));
         
-        JButton signUp_button = new JButton("Sign Up");
+        signUp_button = new JButton("Sign Up");
         signUp_button.setFont(new Font("Arial",Font.BOLD,16));
+        signUp_button.setFocusable(false);
         signUp_button.setForeground(Color.WHITE);
         signUp_button.setBackground(Color.BLACK);
         signUp_button.setPreferredSize(new Dimension(200,300));
+        signUp_button.addActionListener(this);
 //        panel2.add(signUp_button);
         
         
@@ -160,20 +175,29 @@ public class SignUp extends JFrame{
         panel1.add(panel2,BorderLayout.EAST);
         
         add(panel1);
-        
-        
-        
 
-
-     
-
-          
-        
         setSize(850,480);
         setLocation(400,200);
         setResizable(false);
-        setVisible(true);
+        setVisible(true);    
+    }
 
-        
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == signUp_button)
+        {
+            try {
+                MySQL.MySQLDatabase sql = new MySQLDatabase("loginDetails",
+                        "(fullname varchar(255), email varchar(255), username varchar(255), password varchar(255))");
+                sql.insertData(Arrays.asList(
+                        FullName_text_field.getText(),
+                        Email_text_field.getText(),
+                        Username_text_field.getText(),
+                        new String(password_text_field.getPassword())
+               ));
+            } catch (SQLException | ClassNotFoundException | IOException ex) {
+                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
