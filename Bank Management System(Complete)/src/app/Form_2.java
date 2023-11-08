@@ -66,6 +66,12 @@ public class Form_2 extends JFrame {
         text_pan.setFont(new Font("Raleway",Font.PLAIN,19));
         add(text_pan);
         
+        JLabel label_adhar = new JLabel("Aadhar Number");
+        label_adhar.setBounds(100,280,300,50);
+        label_adhar.setFont(new Font("Raleway",Font.BOLD,25));
+        add(label_adhar);
+        
+        
         
         
         
