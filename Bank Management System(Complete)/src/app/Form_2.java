@@ -5,10 +5,12 @@
 package app;
 
 import java.awt.Font;
+import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 //import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
@@ -80,6 +82,37 @@ public class Form_2 extends JFrame {
         label_account.setBounds(100,340,300,50);
         label_account.setFont(new Font("Raleway",Font.BOLD,25));
         add(label_account);
+        
+        JRadioButton account = new JRadioButton("Savings Account");
+        account.setBounds(350, 340, 200, 40);
+        account.setFont(new Font("Raleway",Font.PLAIN,18));
+        account.setFocusable(false);
+        add(account);
+        
+        JRadioButton account1 = new JRadioButton("Fixed Deposit Account");
+        account1.setBounds(550, 340, 250, 40);
+        account1.setFont(new Font("Raleway",Font.PLAIN,18));
+        account1.setFocusable(false);
+        add(account1);
+        
+        JRadioButton account2 = new JRadioButton("Current Account");
+        account2.setBounds(350, 410, 160, 40);
+        account2.setFont(new Font("Raleway",Font.PLAIN,18));
+        account2.setFocusable(false);
+        add(account2);
+        
+        JRadioButton account3 = new JRadioButton("Recurring Deposit Account");
+        account3.setBounds(550, 410, 300, 40);
+        account3.setFont(new Font("Raleway",Font.PLAIN,18));
+        account3.setFocusable(false);
+        add(account3);
+        
+        ButtonGroup group1=new ButtonGroup();
+        group1.add(account);
+        group1.add(account1);
+        group1.add(account2);
+        group1.add(account3);
+        
         
         
         
