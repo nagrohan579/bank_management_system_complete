@@ -34,6 +34,11 @@ public class Form_2 extends JFrame {
         religion_combo.setFont(new Font("Raleway",Font.PLAIN,20));
         add(religion_combo);
         
+        JLabel label_category = new JLabel("Category");
+        label_category.setBounds(100,100,300,50);
+        label_category.setFont(new Font("Raleway",Font.BOLD,25));
+        add(label_category);
+        
         
         
         
