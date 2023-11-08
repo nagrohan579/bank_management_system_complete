@@ -147,7 +147,7 @@ public class Login extends JFrame implements ActionListener {
           else if(e.getSource()==button3)
           {
               this.dispose();
-//              Register1 ob2 = new Register1();
+              new SignUp();
           }
           
          
