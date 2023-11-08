@@ -6,6 +6,7 @@ package app;
 
 import java.awt.Font;
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 //import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -113,6 +114,12 @@ public class Form_2 extends JFrame {
         group1.add(account2);
         group1.add(account3);
         
+        JCheckBox checkBox = new JCheckBox();
+        checkBox .setText("I hereby declare that the above mentioned details correct to the best of my knowledge");
+        checkBox.setFocusable(false);
+        checkBox.setBounds(100, 500, 750, 40);
+        checkBox.setFont(new Font("Raleway",Font.PLAIN,17));
+        add(checkBox);
         
         
         
