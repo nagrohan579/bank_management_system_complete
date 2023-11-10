@@ -195,6 +195,9 @@ public class SignUp extends JFrame implements ActionListener{
                         Username_text_field.getText(),
                         new String(password_text_field.getPassword())
                ));
+                
+                this.dispose();
+                new Login();
             } catch (SQLException | ClassNotFoundException | IOException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
             }
