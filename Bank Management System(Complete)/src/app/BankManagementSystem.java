@@ -15,10 +15,11 @@ public class BankManagementSystem {
 //          SignUp ob1 = new SignUp();
 //          Form_1 ob2 = new Form_1();
 //          Form_2 ob3 = new Form_2();
+
+//        new HomePage();
         
         
-        
-        
+       
 //        
 //        try(Scanner sc = new Scanner(System.in))
 //        {

@@ -4,6 +4,7 @@
  */
 package MySQL;
 
+import app.User;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -125,6 +126,7 @@ public class MySQLDatabase {
 
         if (rs.next()) {
             if (rs.getString("password").equals(password)) {
+                User.name = rs.getString("fullname");
                 return true;
             } else {
                 System.out.println("Invalid password!");
