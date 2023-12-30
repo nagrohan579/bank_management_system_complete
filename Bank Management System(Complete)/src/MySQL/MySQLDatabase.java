@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Formatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -129,11 +130,13 @@ public class MySQLDatabase {
                 User.name = rs.getString("fullname");
                 return true;
             } else {
-                System.out.println("Invalid password!");
+//                System.out.println("Invalid password!");
+                JOptionPane.showMessageDialog(null, "Invalid password!", "WARNING!", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
         }
 
+        JOptionPane.showMessageDialog(null, "Invalid username!", "WARNING!", JOptionPane.WARNING_MESSAGE);
         System.out.println("Invalid username!");
         return false;
     }
