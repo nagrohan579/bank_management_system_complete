@@ -146,6 +146,8 @@ public class Form_2 extends JFrame {
         
         
         
+        
+        
         setLayout(null);
         setSize(850,800);
         setLocation(360,10);
