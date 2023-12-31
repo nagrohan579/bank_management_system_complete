@@ -139,8 +139,10 @@ public class Login extends JFrame implements ActionListener {
                         "(fullname varchar(255), email varchar(255), username varchar(255), password varchar(255))");
                 if(sql.validatePassword(
                         username_text_field.getText(), 
-                        new String(password_field.getPassword())))
-                    new HomePage();
+                        new String(password_field.getPassword()))){
+                    this.dispose();
+                    new HomePage();                    
+                }
                 
             } else if (e.getSource() == clear_button) {
                 username_text_field.setText("");

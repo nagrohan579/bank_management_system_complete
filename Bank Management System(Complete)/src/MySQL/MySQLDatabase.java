@@ -68,20 +68,23 @@ public class MySQLDatabase {
     }
 
     public void insertData(List<String> inputList) throws SQLException {
-        String query = String.format("INSERT INTO %s VALUES(?,?,?,?)", tableName);
-        PreparedStatement p = con.prepareStatement(query);
-        int i = 1;
-        for(String elem : inputList)
-        {
-            p.setString(i, elem);
-            i++;
+        String query = String.format("INSERT INTO %s VALUES(?", tableName);
+        for(int i = 1; i < inputList.size(); i++ )
+            query += ",?";
+        query += ")";
+//        String query = String.format("INSERT INTO %s VALUES(?,?,?,?);
+        try (PreparedStatement p = con.prepareStatement(query)) {
+            int i = 1;
+            for(String elem : inputList)
+            {
+                p.setString(i, elem);
+                i++;
+            }
+            
+            int count = p.executeUpdate();
+            
+            System.out.println(String.format("%d row(s) added sucessfully", count));
         }
-
-        int count = p.executeUpdate();
-
-        System.out.println(String.format("%d row(s) added sucessfully", count));
-
-        p.close();
     }
 
     public void readData() throws SQLException {

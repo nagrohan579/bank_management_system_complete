@@ -4,8 +4,13 @@
  */
 package app;
 
+import MySQL.MySQLDatabase;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -13,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -20,12 +26,17 @@ import javax.swing.JTextField;
  *
  * @author Ronita Adhikari
  */
-public class Form_2 extends JFrame {
-    JButton button1 = new JButton();
-    JButton button2 = new JButton();
+public class Form_2 extends JFrame implements ActionListener{
+    JButton submit_btn = new JButton();
+    JButton cancel_btn = new JButton();
+    JCheckBox checkBox;
+    AccountInformation accinfo;
+
     
-    Form_2()
+    Form_2(AccountInformation accinfo)
     {
+        this.accinfo = accinfo; 
+        
         setTitle("APPLICATION FORM2");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -116,31 +127,31 @@ public class Form_2 extends JFrame {
         group1.add(account2);
         group1.add(account3);
         
-        JCheckBox checkBox = new JCheckBox();
+        checkBox = new JCheckBox();
         checkBox .setText("I hereby declare that the above mentioned details correct to the best of my knowledge");
         checkBox.setFocusable(false);
         checkBox.setBounds(100, 500, 750, 40);
         checkBox.setFont(new Font("Raleway",Font.PLAIN,17));
         add(checkBox);
         
-        button1 = new JButton("Submit");
-        button1.setFont(new Font("Arial",Font.BOLD,16));
-        button1.setForeground(Color.WHITE);
-        button1.setBackground(Color.BLACK);
-        button1.setBounds(210, 600, 100, 40);
-        button1.setFocusable(false);
-//        button1.addActionListener(this);
-        add(button1);
+        submit_btn = new JButton("Submit");
+        submit_btn.setFont(new Font("Arial",Font.BOLD,16));
+        submit_btn.setForeground(Color.WHITE);
+        submit_btn.setBackground(Color.BLACK);
+        submit_btn.setBounds(210, 600, 100, 40);
+        submit_btn.setFocusable(false);
+        submit_btn.addActionListener(this);
+        add(submit_btn);
         
         
-        button2 = new JButton("Cancel");
-        button2.setFont(new Font("Arial",Font.BOLD,16));
-        button2.setForeground(Color.WHITE);
-        button2.setBackground(Color.BLACK);
-        button2.setBounds(540, 600, 100, 40);
-        button2.setFocusable(false);
-//        button1.addActionListener(this);
-        add(button2);
+        cancel_btn = new JButton("Cancel");
+        cancel_btn.setFont(new Font("Arial",Font.BOLD,16));
+        cancel_btn.setForeground(Color.WHITE);
+        cancel_btn.setBackground(Color.BLACK);
+        cancel_btn.setBounds(540, 600, 100, 40);
+        cancel_btn.setFocusable(false);
+        cancel_btn.addActionListener(this);
+        add(cancel_btn);
         
         
         
@@ -154,5 +165,55 @@ public class Form_2 extends JFrame {
         setResizable(false);
         setVisible(true);
     }
-    
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == submit_btn){
+            if(checkBox.isSelected())
+            {
+                this.dispose();
+                accinfo.generateAccNo();
+                try{
+                    MySQL.MySQLDatabase sql;
+                    sql = new MySQLDatabase("accountinfo",
+                            "(firstname varchar(255), "
+                                    + "middlename varchar(255), "
+                                    + "lastname varchar(255), "
+                                    + "gender varchar(255), "
+                                    + "phone_number varchar(255), "
+                                    + "DOB varchar(255), "
+                                    + "email varchar(255), "
+                                    + "address varchar(255), "
+                                    + "state varchar(255), "
+                                    + "city varchar(255), "
+                                    + "religion varchar(255), "
+                                    + "category varchar(255), "
+                                    + "occupation varchar(255), "
+                                    + "panNumber varchar(255), "
+                                    + "adhaarNumber varchar(255), "
+                                    + "accountType varchar(255), "
+                                    + "accountNumber)");
+                    
+                    sql.insertData(accinfo.getList());
+                }
+                catch(IOException | ClassNotFoundException | SQLException E){ }
+                JOptionPane.showMessageDialog(null, 
+                    "Account successfully created! Your new Account number is: XXXX XXXX XXXX " + accinfo.getAccountNumber(), 
+                    "SUCCESS!", 
+                    JOptionPane.PLAIN_MESSAGE);
+                System.out.println(accinfo);  
+                new HomePage();
+            }    
+            else
+                JOptionPane.showMessageDialog(null, 
+                    "Please check the box in order to preoceed!", 
+                    "WARNING!", 
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        if(e.getSource() == cancel_btn)
+        {
+            this.dispose();
+            new HomePage();
+        }
+    }    
 }

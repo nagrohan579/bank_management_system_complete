@@ -71,6 +71,7 @@ public class HomePage extends JFrame implements ActionListener{
         try{
             if(e.getSource() == add_account_button)
             {
+                this.dispose();
                 new Form_1();
             }
         }catch(Exception E)

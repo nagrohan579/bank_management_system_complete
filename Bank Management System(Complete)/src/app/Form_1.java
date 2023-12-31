@@ -23,7 +23,12 @@ import javax.swing.JTextField;
  */
 public class Form_1 extends JFrame implements ActionListener{
     
-    JButton button = new JButton("Next");
+    JButton next_button = new JButton("Next");
+    AccountInformation accinfo = new AccountInformation();
+    JTextField text1_name, text2_name, text3_name,phone_number_text_field, text_email, text_state,text_city;
+    JRadioButton rb_female_gender, rb_male_gender; 
+    JComboBox day_combo, month_combo, year_combo;
+    
     
     Form_1()
     {
@@ -117,17 +122,17 @@ public class Form_1 extends JFrame implements ActionListener{
         labelFullName.setFont(new Font("Raleway",Font.PLAIN,25));
         add(labelFullName);
         
-        JTextField text1_name = new JTextField(15);
+        text1_name = new JTextField(15);
         text1_name.setBounds(40,310,250,40);
         text1_name.setFont(new Font("Raleway",Font.PLAIN,16));
         add(text1_name);
         
-        JTextField text2_name = new JTextField(15);
+        text2_name = new JTextField(15);
         text2_name.setBounds(300,310,250,40);
         text2_name.setFont(new Font("Raleway",Font.PLAIN,16));
         add(text2_name);
         
-        JTextField text3_name = new JTextField(15);
+        text3_name = new JTextField(15);
         text3_name.setBounds(560,310,250,40);
         text3_name.setFont(new Font("Raleway",Font.PLAIN,16));
         add(text3_name);
@@ -152,21 +157,21 @@ public class Form_1 extends JFrame implements ActionListener{
         labelGender.setFont(new Font("Raleway",Font.PLAIN,25));
         add(labelGender);
         
-        JRadioButton rd_gender1=new JRadioButton("Male");
-        rd_gender1.setBounds(300,400,150,30);
-        rd_gender1.setFont(new Font("Raleway",Font.PLAIN,20));
-        add(rd_gender1);
+        rb_male_gender = new JRadioButton("Male");
+        rb_male_gender.setBounds(300,400,150,30);
+        rb_male_gender.setFont(new Font("Raleway",Font.PLAIN,20));
+        add(rb_male_gender);
         
-        JRadioButton rd_gender2=new JRadioButton("Female");
-        rd_gender2.setBounds(490,400,250,30);
-        rd_gender2.setFont(new Font("Raleway",Font.PLAIN,20));
-        add(rd_gender2);
+        rb_female_gender = new JRadioButton("Female");
+        rb_female_gender.setBounds(490,400,250,30);
+        rb_female_gender.setFont(new Font("Raleway",Font.PLAIN,20));
+        add(rb_female_gender);
         
         
         
         ButtonGroup group=new ButtonGroup();
-        group.add(rd_gender1);
-        group.add(rd_gender2);
+        group.add(rb_male_gender);
+        group.add(rb_female_gender);
         
         
         
@@ -175,30 +180,30 @@ public class Form_1 extends JFrame implements ActionListener{
         labelPhoneNumber.setFont(new Font("Raleway",Font.PLAIN,25));
         add(labelPhoneNumber);
         
-        JTextField text_phone = new JTextField(10);
-        text_phone.setBounds(40, 510, 380, 40);
-        text_phone.setFont(new Font("Raleway",Font.PLAIN,25));
-        add(text_phone);
+        phone_number_text_field = new JTextField(10);
+        phone_number_text_field.setBounds(40, 510, 380, 40);
+        phone_number_text_field.setFont(new Font("Raleway",Font.PLAIN,25));
+        add(phone_number_text_field);
         
         JLabel labelDOB = new JLabel("Date Of Birth");
         labelDOB.setBounds(510,460,250,30);
         labelDOB.setFont(new Font("Raleway",Font.PLAIN,25));
         add(labelDOB);
         
-        String[] Dates = {"1","2","3","4","5","6","7","8","9","10", "11","12","13" ,"14", "15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-        JComboBox Date_combo=new JComboBox(Dates);
-        Date_combo.setBounds(500,510,80,40);
-        Date_combo.setFont(new Font("Raleway",Font.PLAIN,20));
-        add(Date_combo);
+        String[] Days = {"1","2","3","4","5","6","7","8","9","10", "11","12","13" ,"14", "15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+        day_combo=new JComboBox(Days);
+        day_combo.setBounds(500,510,80,40);
+        day_combo.setFont(new Font("Raleway",Font.PLAIN,20));
+        add(day_combo);
         
         String[] months = {"Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"};
-        JComboBox month_combo=new JComboBox(months);
+        month_combo=new JComboBox(months);
         month_combo.setBounds(600,510,80,40);
         month_combo.setFont(new Font("Raleway",Font.PLAIN,20));
         add(month_combo);
         
         String[] year = {"1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005"};
-        JComboBox year_combo=new JComboBox(year);
+        year_combo=new JComboBox(year);
         year_combo.setBounds(700,510,110,40);
         year_combo.setFont(new Font("Raleway",Font.PLAIN,20));
         add(year_combo);
@@ -208,7 +213,7 @@ public class Form_1 extends JFrame implements ActionListener{
         labelEmail.setFont(new Font("Raleway",Font.PLAIN,25));
         add(labelEmail);
         
-        JTextField text_email = new JTextField(40);
+        text_email = new JTextField(40);
         text_email.setBounds(155, 575, 655, 40);
         text_email.setFont(new Font("Raleway",Font.PLAIN,25));
         add(text_email);
@@ -218,7 +223,7 @@ public class Form_1 extends JFrame implements ActionListener{
         labelstate.setFont(new Font("Raleway",Font.PLAIN,25));
         add(labelstate);
         
-        JTextField text_state = new JTextField(40);
+        text_state = new JTextField(40);
         text_state.setBounds(155, 640, 270, 40);
         text_state.setFont(new Font("Raleway",Font.PLAIN,25));
         add(text_state);
@@ -228,7 +233,7 @@ public class Form_1 extends JFrame implements ActionListener{
         labelcity.setFont(new Font("Raleway",Font.PLAIN,25));
         add(labelcity);
         
-        JTextField text_city = new JTextField(40);
+        text_city = new JTextField(40);
         text_city .setBounds(530, 640, 280, 40);
         text_city .setFont(new Font("Raleway",Font.PLAIN,25));
         add(text_city );
@@ -245,13 +250,13 @@ public class Form_1 extends JFrame implements ActionListener{
 //        add(text_email);
         
         
-        button.setBounds(700, 700, 100, 40);
-        button.setFont(new Font("Raleway",Font.PLAIN,20));
-        button.setForeground(Color.WHITE);
-        button.setBackground(Color.BLACK);
-        button.addActionListener(this);
+        next_button.setBounds(700, 700, 100, 40);
+        next_button.setFont(new Font("Raleway",Font.PLAIN,20));
+        next_button.setForeground(Color.WHITE);
+        next_button.setBackground(Color.BLACK);
+        next_button.addActionListener(this);
                 
-        add(button);
+        add(next_button);
         
 //        JScrollPane scrollBar=new JScrollPane(this,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //        add(scrollBar);
@@ -284,13 +289,22 @@ public class Form_1 extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        if(e.getSource()==button)
-              {
-                  this.dispose();
-//                  form2 ob3 = new form2();
-                    Form_2 ob3 = new Form_2();
-              }
-    
+        if(e.getSource()==next_button)
+        {
+            this.dispose();
+            accinfo.setFirstName(text1_name.getText());
+            accinfo.setMiddleName(text2_name.getText());
+            accinfo.setLastName(text3_name.getText());
+            accinfo.setPhone_number(phone_number_text_field.getText());
+            accinfo.setDOB(day_combo.getSelectedItem()+"/"+month_combo.getSelectedItem()+"/"+year_combo.getSelectedItem());
+            accinfo.setEmail(text_email.getText());
+            accinfo.setState(text_state.getText());
+            accinfo.setCity(text_city.getText());
+            new Form_2(accinfo);
+        }
+        if(rb_male_gender.isSelected())
+            accinfo.setGender("MALE");
+        if(rb_female_gender.isSelected())
+            accinfo.setGender("FEMALE");
     }
-    
 }
