@@ -24,6 +24,9 @@ public class MySQLDatabase {
 
     private Connection con;
     private String tableName;
+    private String url;
+    private String username = "root";
+    private String password = "";
 
 //    public MySQLDatabase() throws SQLException, ClassNotFoundException, IOException {
 //        tableName = "";
@@ -40,23 +43,38 @@ public class MySQLDatabase {
 
     public MySQLDatabase(String tableName, String tableFields) throws SQLException, ClassNotFoundException, IOException {
         this.tableName = tableName;
-
-        String url = "jdbc:mysql://localhost:3306/";
-        String username = "root";
-        String password = "";
-
-        con = DriverManager.getConnection(url,username,password);
-        Statement st = con.createStatement();
-
-        String query = "CREATE DATABASE IF NOT EXISTS customerDB";
-        st.executeUpdate(query);
+        
+//        con = DriverManager.getConnection(url,username,password);
+//        
+//
+//        
+//        st.executeUpdate(query);
 
         // Create table
+        // Establish connection, create database if needed, and select it
         url = "jdbc:mysql://localhost:3306/customerDB";
-        con = DriverManager.getConnection(url,username,password);
+        try{
+            con = DriverManager.getConnection(url,username,password);
+        }catch(SQLException e)
+        {
+            // Database doesn't exist yet, create it
+            createDatabase();
+            con = DriverManager.getConnection(url,username,password);
+        }
+        
+        Statement st = con.createStatement();
         st = con.createStatement();
-        query = String.format("CREATE TABLE IF NOT EXISTS %s %s", tableName, tableFields);
+        String query = String.format("CREATE TABLE IF NOT EXISTS %s %s", tableName, tableFields);
         st.executeUpdate(query);
+    }
+
+    private void createDatabase() throws SQLException {
+        String createDBUrl = "jdbc:mysql://localhost:3306/";
+        Connection createDBCon = DriverManager.getConnection(createDBUrl, username, password);
+        Statement st = createDBCon.createStatement();
+        st.executeUpdate("CREATE DATABASE IF NOT EXISTS customerDB");
+        st.close();
+        createDBCon.close();
     }
 
     public void showTables() throws SQLException {

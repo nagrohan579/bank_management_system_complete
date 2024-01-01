@@ -192,11 +192,13 @@ public class Form_2 extends JFrame implements ActionListener{
                                     + "panNumber varchar(255), "
                                     + "adhaarNumber varchar(255), "
                                     + "accountType varchar(255), "
-                                    + "accountNumber)");
+                                    + "accountNumber varchar(255))");
                     
                     sql.insertData(accinfo.getList());
                 }
-                catch(IOException | ClassNotFoundException | SQLException E){ }
+                catch(IOException | ClassNotFoundException | SQLException E){
+                    E.printStackTrace();
+                }
                 JOptionPane.showMessageDialog(null, 
                     "Account successfully created! Your new Account number is: XXXX XXXX XXXX " + accinfo.getAccountNumber(), 
                     "SUCCESS!", 
