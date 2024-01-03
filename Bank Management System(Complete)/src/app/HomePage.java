@@ -180,6 +180,79 @@ public class HomePage extends JFrame implements ActionListener{
             d.setVisible(true);
             
            }
+    public void ShowDepositButtonDialouge()
+    {
+            JDialog d = new JDialog(this,"Deposit");
+//            d.setSize(500,350);
+//            d.setVisible(true);
+//            d.setLocation(540,320);
+                
+            JLabel account_no_label = new JLabel("Account No. XXXX XXXX XXXX ");
+            account_no_label.setFont(new Font("AvantGrade",Font.BOLD,20));
+            
+            JTextField text_account = new JTextField(4);
+            text_account.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            JLabel amount_label = new JLabel("Enter the Amount: ");
+            amount_label.setFont(new Font("Raleway",Font.BOLD,32));
+            
+            JTextField text_amount = new JTextField(10);
+            text_amount.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            JButton submitButton = new JButton("DEPOSIT");
+            submitButton.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            
+            
+            
+//            account_no_label.setBounds(100, 150,200 , 100);    
+//            d.add(account_no_label);
+            
+            JPanel p = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.CENTER;
+            gbc.insets = new Insets(5,5,5,5);
+            
+            gbc.gridx=0;
+            gbc.gridy=0;
+            gbc.insets.left = 40;
+            gbc.gridwidth=1;
+            p.add(account_no_label,gbc);
+            
+            
+            
+//            gbc.gridwidth=1;
+            gbc.gridx=1;
+            gbc.insets.left = 0;
+//            gbc.insets.right = 20;
+            p.add(text_account,gbc);
+                
+//                JTextField text_account = new JTextField("XXX XXX XXX ");
+////                text_account.setBounds(350, 230, 400, 30);
+//                text_account.setFont(new Font("Raleway",Font.PLAIN,19));
+//                d.add(text_account);
+
+            gbc.gridx=0;
+            gbc.gridy=1;
+//            gbc.gridwidth = 2;
+            gbc.insets.left = 22;
+            gbc.gridwidth=1;
+            p.add(amount_label,gbc);
+            
+            gbc.gridx=1;
+            gbc.insets.left = 0;
+            p.add(text_amount,gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            gbc.gridwidth = 2;
+            p.add(submitButton,gbc);
+
+            d.add(p);
+            d.pack();
+            d.setLocationRelativeTo(null);
+            d.setVisible(true);
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -193,6 +266,11 @@ public class HomePage extends JFrame implements ActionListener{
             {
                 this.ShowViewBalanceDialogue();
             }
+            if(e.getSource() == deposit_button)
+            {
+                this.ShowDepositButtonDialouge();
+            }
+            
         }catch(Exception E)
         {
             E.printStackTrace();
