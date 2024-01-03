@@ -24,6 +24,7 @@ public class HomePage extends JFrame implements ActionListener{
     JButton view_balance_button;
     JButton money_transfer_button;
     JButton get_statement_button;
+    JButton deposit_button;
 
     public HomePage(){
         setTitle("Home");
@@ -51,38 +52,53 @@ public class HomePage extends JFrame implements ActionListener{
         view_balance_button = new JButton("VIEW BALANCE");
         view_balance_button.setFocusable(false);
 //        view_balance_button.setPreferredSize(new Dimension(150,50));
-        view_balance_button.setBounds(100, 150, 200, 50);
+        view_balance_button.setBounds(120, 120, 200, 50);
         view_balance_button.setFont(new Font("Arial",Font.BOLD,16));
         view_balance_button.setForeground(Color.WHITE);
         view_balance_button.setBackground(Color.BLACK);
         add(view_balance_button);
-//        view_balance_button.addActionListener(this);
+        view_balance_button.addActionListener(this);
 
 
         money_transfer_button = new JButton("MONEY TRANSFER");
         money_transfer_button.setFocusable(false);
 //        view_balance_button.setPreferredSize(new Dimension(150,50));
-        money_transfer_button.setBounds(100, 300, 200, 50);
+        money_transfer_button.setBounds(120, 230, 200, 50);
         money_transfer_button.setFont(new Font("Arial",Font.BOLD,16));
         money_transfer_button.setForeground(Color.WHITE);
         money_transfer_button.setBackground(Color.BLACK);
+        money_transfer_button.addActionListener(this);
         add(money_transfer_button);
+        
+        
+        deposit_button = new JButton("DEPOSIT");
+        deposit_button.setFocusable(false);
+//        view_balance_button.setPreferredSize(new Dimension(150,50));
+        deposit_button.setBounds(500, 120, 200, 50);
+        deposit_button.setFont(new Font("Arial",Font.BOLD,16));
+        deposit_button.setForeground(Color.WHITE);
+        deposit_button.setBackground(Color.BLACK);
+        deposit_button.addActionListener(this);
+        add(deposit_button);
+        
         
         
         get_statement_button = new JButton("GET STATEMENT");
         get_statement_button.setFocusable(false);
 //        view_balance_button.setPreferredSize(new Dimension(150,50));
-        get_statement_button.setBounds(550, 150, 200, 50);
+        get_statement_button.setBounds(500, 230, 200, 50);
         get_statement_button.setFont(new Font("Arial",Font.BOLD,16));
         get_statement_button.setForeground(Color.WHITE);
         get_statement_button.setBackground(Color.BLACK);
         add(get_statement_button);
         
         
+        
+        
         add_account_button = new JButton("ADD ACCOUNT");
         add_account_button.setFocusable(false);
 //        add_account_button.setPreferredSize(new Dimension(150,50));
-        add_account_button.setBounds(550,300 , 200, 50);
+        add_account_button.setBounds(310,330 , 200, 50);
         add_account_button.setFont(new Font("Arial",Font.BOLD,16));
         add_account_button.setForeground(Color.WHITE);
         add_account_button.setBackground(Color.BLACK);

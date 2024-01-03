@@ -12,12 +12,12 @@ import MySQL.MySQLDatabase;
 public class BankManagementSystem {
     public static void main(String[] args) {
         
-        Login ob = new Login();
+//        Login ob = new Login();
 //          SignUp ob1 = new SignUp();
 //          Form_1 ob2 = new Form_1();
 //          Form_2 ob3 = new Form_2();
 
-//        new HomePage();
+        new HomePage();
         
         
        
