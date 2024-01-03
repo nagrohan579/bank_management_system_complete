@@ -253,6 +253,102 @@ public class HomePage extends JFrame implements ActionListener{
             d.setLocationRelativeTo(null);
             d.setVisible(true);
     }
+    public void ShowMoneyTransferDialouge()
+    {
+            JDialog d = new JDialog(this,"Money Transfer");
+//            d.setSize(500,350);
+//            d.setVisible(true);
+//            d.setLocation(540,320);
+                
+            JLabel account_from_label = new JLabel("Account From. XXXX XXXX XXXX");
+            account_from_label.setFont(new Font("AvantGrade",Font.BOLD,20));
+            
+            JTextField text_account_from = new JTextField(4);
+            text_account_from.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            
+            JLabel account_to_label = new JLabel("Account to. XXXX XXXX XXXX");
+            account_to_label.setFont(new Font("AvantGrade",Font.BOLD,20));
+            
+            JTextField text_account_to = new JTextField(4);
+            text_account_to.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            JLabel amount_label = new JLabel("Enter the Amount");
+            amount_label.setFont(new Font("AvantGrade",Font.BOLD,20));
+            
+            JTextField amount_text_field = new JTextField(10);
+            amount_text_field.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+//            JLabel amount_label = new JLabel("Enter the Amount: ");
+//            amount_label.setFont(new Font("Raleway",Font.BOLD,32));
+//            
+//            JTextField text_amount = new JTextField(10);
+//            text_amount.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            JButton submitButton = new JButton("TRANSFER");
+            submitButton.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            
+            
+            
+//            account_no_label.setBounds(100, 150,200 , 100);    
+//            d.add(account_no_label);
+            
+            JPanel p = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.CENTER;
+            gbc.insets = new Insets(5,5,5,5);
+            
+            gbc.gridx=0;
+            gbc.gridy=0;
+            gbc.insets.left = 60;
+            gbc.gridwidth=1;
+            p.add(account_from_label,gbc);
+            
+            
+            
+//            gbc.gridwidth=1;
+            gbc.gridx=1;
+            gbc.insets.left = 0;
+            p.add(text_account_from,gbc);
+                
+//                JTextField text_account = new JTextField("XXX XXX XXX ");
+////                text_account.setBounds(350, 230, 400, 30);
+//                text_account.setFont(new Font("Raleway",Font.PLAIN,19));
+//                d.add(text_account);
+
+            gbc.gridx=0;
+            gbc.gridy=1;
+//            gbc.gridwidth = 2;
+            gbc.insets.left = 20;
+            gbc.gridwidth=1;
+            p.add(account_to_label,gbc);
+            
+            gbc.gridx=1;
+            gbc.insets.left = 0;
+            p.add(text_account_to,gbc);
+            
+            gbc.gridx=0;
+            gbc.gridy=2;
+            gbc.insets.right = 100;
+            gbc.gridwidth=1;
+            p.add(amount_label,gbc);
+            
+            gbc.gridx=1;
+            gbc.insets.left = 0;
+            p.add(amount_text_field,gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            gbc.gridwidth = 2;
+            gbc.insets.left = 50;
+            p.add(submitButton,gbc);
+
+            d.add(p);
+            d.pack();
+            d.setLocationRelativeTo(null);
+            d.setVisible(true);
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -269,6 +365,10 @@ public class HomePage extends JFrame implements ActionListener{
             if(e.getSource() == deposit_button)
             {
                 this.ShowDepositButtonDialouge();
+            }
+            if(e.getSource() == money_transfer_button)
+            {
+                this.ShowMoneyTransferDialouge();
             }
             
         }catch(Exception E)
