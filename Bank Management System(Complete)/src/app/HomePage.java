@@ -5,15 +5,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 //import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 //import java.awt.GridBagConstraints;
 //import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -111,6 +116,70 @@ public class HomePage extends JFrame implements ActionListener{
         setResizable(false);
         setVisible(true);    
     }
+    public void ShowViewBalanceDialogue()
+        {
+            JDialog d = new JDialog(this,"View Balance");
+//            d.setSize(500,350);
+//            d.setVisible(true);
+//            d.setLocation(540,320);
+                
+            JLabel account_no_label = new JLabel("Account No. XXXX XXXX XXXX ");
+            account_no_label.setFont(new Font("AvantGrade",Font.BOLD,20));
+            
+            JTextField text_account = new JTextField(4);
+            text_account.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            JLabel balance_label = new JLabel("10,000");
+            balance_label.setFont(new Font("Raleway",Font.BOLD,34));
+            
+            JButton submitButton = new JButton("SUBMIT");
+            submitButton.setFont(new Font("Raleway",Font.PLAIN,20));
+            
+            
+            
+            
+//            account_no_label.setBounds(100, 150,200 , 100);    
+//            d.add(account_no_label);
+            
+            JPanel p = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.CENTER;
+            gbc.insets = new Insets(5,5,5,5);
+            
+            gbc.gridx=0;
+            gbc.gridy=0;
+            gbc.insets.left = 20;
+            gbc.gridwidth=1;
+            p.add(account_no_label,gbc);
+            
+            
+            
+//            gbc.gridwidth=1;
+            gbc.gridx=1;
+            gbc.insets.left = 0;
+            p.add(text_account,gbc);
+                
+//                JTextField text_account = new JTextField("XXX XXX XXX ");
+////                text_account.setBounds(350, 230, 400, 30);
+//                text_account.setFont(new Font("Raleway",Font.PLAIN,19));
+//                d.add(text_account);
+
+            gbc.gridx=0;
+            gbc.gridy=1;
+            gbc.gridwidth = 2;
+            p.add(balance_label,gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            gbc.gridwidth = 2;
+            p.add(submitButton,gbc);
+
+            d.add(p);
+            d.pack();
+            d.setLocationRelativeTo(null);
+            d.setVisible(true);
+            
+           }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -119,6 +188,10 @@ public class HomePage extends JFrame implements ActionListener{
             {
                 this.dispose();
                 new Form_1();
+            }
+            if(e.getSource() == view_balance_button)
+            {
+                this.ShowViewBalanceDialogue();
             }
         }catch(Exception E)
         {
