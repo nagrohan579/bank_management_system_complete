@@ -30,6 +30,9 @@ public class Form_2 extends JFrame implements ActionListener{
     JButton submit_btn = new JButton();
     JButton cancel_btn = new JButton();
     JCheckBox checkBox;
+    JComboBox religion_combo, category_combo;
+    JTextField text_occupation, text_pan, text_adhar;
+    JRadioButton savings_account_rb, fd_account_rb, current_account_rb, recurring_account_rb;
     AccountInformation accinfo;
 
     
@@ -45,8 +48,8 @@ public class Form_2 extends JFrame implements ActionListener{
         label1.setFont(new Font("Raleway",Font.BOLD,25));
         add(label1);
         
-        String[] religion = {"Hindu","Buddhist","Muslim","Jewish","Sikh","Other"};
-        JComboBox religion_combo=new JComboBox(religion);
+        String[] religion = {"Hindu","Chirsitian","Buddhist","Jain","Muslim","Jewish","Sikh","Other"};
+        religion_combo = new JComboBox(religion);
         religion_combo.setBounds(350,55,400,30);
         religion_combo.setFont(new Font("Raleway",Font.PLAIN,20));
         add(religion_combo);
@@ -57,7 +60,7 @@ public class Form_2 extends JFrame implements ActionListener{
         add(label_category);
         
         String[] category = {"General","SC","ST","OBC","Other"};
-        JComboBox category_combo=new JComboBox(category);
+        category_combo = new JComboBox(category);
         category_combo.setBounds(350,110,400,30);
         category_combo.setFont(new Font("Raleway",Font.PLAIN,20));
         add(category_combo);
@@ -67,7 +70,7 @@ public class Form_2 extends JFrame implements ActionListener{
         label_Occupation.setFont(new Font("Raleway",Font.BOLD,25));
         add(label_Occupation);
         
-        JTextField text_occupation = new JTextField();
+        text_occupation = new JTextField();
         text_occupation.setBounds(350, 170, 400, 30);
         text_occupation.setFont(new Font("Raleway",Font.PLAIN,19));
         add(text_occupation);
@@ -77,7 +80,7 @@ public class Form_2 extends JFrame implements ActionListener{
         label_pan.setFont(new Font("Raleway",Font.BOLD,25));
         add(label_pan);
         
-        JTextField text_pan = new JTextField();
+        text_pan = new JTextField();
         text_pan.setBounds(350, 230, 400, 30);
         text_pan.setFont(new Font("Raleway",Font.PLAIN,19));
         add(text_pan);
@@ -87,7 +90,7 @@ public class Form_2 extends JFrame implements ActionListener{
         label_adhar.setFont(new Font("Raleway",Font.BOLD,25));
         add(label_adhar);
         
-        JTextField text_adhar = new JTextField();
+        text_adhar = new JTextField();
         text_adhar.setBounds(350, 290, 400, 30);
         text_adhar.setFont(new Font("Raleway",Font.PLAIN,19));
         add(text_adhar);
@@ -97,35 +100,35 @@ public class Form_2 extends JFrame implements ActionListener{
         label_account.setFont(new Font("Raleway",Font.BOLD,25));
         add(label_account);
         
-        JRadioButton account = new JRadioButton("Savings Account");
-        account.setBounds(350, 340, 200, 40);
-        account.setFont(new Font("Raleway",Font.PLAIN,18));
-        account.setFocusable(false);
-        add(account);
+        savings_account_rb = new JRadioButton("Savings Account");
+        savings_account_rb.setBounds(350, 340, 200, 40);
+        savings_account_rb.setFont(new Font("Raleway",Font.PLAIN,18));
+        savings_account_rb.setFocusable(false);
+        add(savings_account_rb);
         
-        JRadioButton account1 = new JRadioButton("Fixed Deposit Account");
-        account1.setBounds(550, 340, 250, 40);
-        account1.setFont(new Font("Raleway",Font.PLAIN,18));
-        account1.setFocusable(false);
-        add(account1);
+        fd_account_rb = new JRadioButton("Fixed Deposit Account");
+        fd_account_rb.setBounds(550, 340, 250, 40);
+        fd_account_rb.setFont(new Font("Raleway",Font.PLAIN,18));
+        fd_account_rb.setFocusable(false);
+        add(fd_account_rb);
         
-        JRadioButton account2 = new JRadioButton("Current Account");
-        account2.setBounds(350, 410, 160, 40);
-        account2.setFont(new Font("Raleway",Font.PLAIN,18));
-        account2.setFocusable(false);
-        add(account2);
+        current_account_rb = new JRadioButton("Current Account");
+        current_account_rb.setBounds(350, 410, 160, 40);
+        current_account_rb.setFont(new Font("Raleway",Font.PLAIN,18));
+        current_account_rb.setFocusable(false);
+        add(current_account_rb);
         
-        JRadioButton account3 = new JRadioButton("Recurring Deposit Account");
-        account3.setBounds(550, 410, 300, 40);
-        account3.setFont(new Font("Raleway",Font.PLAIN,18));
-        account3.setFocusable(false);
-        add(account3);
+        recurring_account_rb = new JRadioButton("Recurring Deposit Account");
+        recurring_account_rb.setBounds(550, 410, 300, 40);
+        recurring_account_rb.setFont(new Font("Raleway",Font.PLAIN,18));
+        recurring_account_rb.setFocusable(false);
+        add(recurring_account_rb);
         
         ButtonGroup group1=new ButtonGroup();
-        group1.add(account);
-        group1.add(account1);
-        group1.add(account2);
-        group1.add(account3);
+        group1.add(savings_account_rb);
+        group1.add(fd_account_rb);
+        group1.add(current_account_rb);
+        group1.add(recurring_account_rb);
         
         checkBox = new JCheckBox();
         checkBox .setText("I hereby declare that the above mentioned details correct to the best of my knowledge");
@@ -153,12 +156,6 @@ public class Form_2 extends JFrame implements ActionListener{
         cancel_btn.addActionListener(this);
         add(cancel_btn);
         
-        
-        
-        
-        
-        
-        
         setLayout(null);
         setSize(850,800);
         setLocation(360,10);
@@ -173,6 +170,19 @@ public class Form_2 extends JFrame implements ActionListener{
             {
                 this.dispose();
                 accinfo.generateAccNo();
+                accinfo.setReligion((String)religion_combo.getSelectedItem());
+                accinfo.setCategory((String)category_combo.getSelectedItem());
+                accinfo.setOccupation(text_occupation.getText());
+                accinfo.setPanNumber(text_pan.getText());
+                accinfo.setAdhaarNumber(text_adhar.getText());
+                if(savings_account_rb.isSelected())
+                    accinfo.setAccountType("SAVINGS ACCOUNT");
+                if(fd_account_rb.isSelected())
+                    accinfo.setAccountType("FIXED DEPOSIT ACCOUNT");
+                if(current_account_rb.isSelected())
+                    accinfo.setAccountType("CURRENT ACCOUNT");
+                if(recurring_account_rb.isSelected())
+                    accinfo.setAccountType("RECURRING DEPOSIT ACCOUNT");
                 try{
                     MySQL.MySQLDatabase sql;
                     sql = new MySQLDatabase("accountinfo",
@@ -192,7 +202,8 @@ public class Form_2 extends JFrame implements ActionListener{
                                     + "panNumber varchar(255), "
                                     + "adhaarNumber varchar(255), "
                                     + "accountType varchar(255), "
-                                    + "accountNumber varchar(255))");
+                                    + "accountNumber varchar(255),"
+                                    + "accountBalance varchar(255))");
                     
                     sql.insertData(accinfo.getList());
                 }

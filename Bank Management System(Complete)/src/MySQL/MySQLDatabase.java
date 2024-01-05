@@ -101,7 +101,7 @@ public class MySQLDatabase {
             
             int count = p.executeUpdate();
             
-            System.out.println(String.format("%d row(s) added sucessfully", count));
+            System.out.println(String.format("Added %d row(s) added sucessfully to %s table", count, tableName));
         }
     }
 

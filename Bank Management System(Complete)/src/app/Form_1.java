@@ -208,7 +208,7 @@ public class Form_1 extends JFrame implements ActionListener{
         year_combo.setFont(new Font("Raleway",Font.PLAIN,20));
         add(year_combo);
         
-        JLabel labelEmail = new JLabel("Address");
+        JLabel labelEmail = new JLabel("e-mail");
         labelEmail.setBounds(40,575,150,30);
         labelEmail.setFont(new Font("Raleway",Font.PLAIN,25));
         add(labelEmail);

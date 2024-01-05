@@ -20,7 +20,16 @@ public class AccountInformation {
             panNumber,
             adhaarNumber,
             accountType,
-            accountNumber; 
+            accountNumber,
+            accountBalance="0"; 
+
+    public String getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(String accountBalance) {
+        this.accountBalance = accountBalance;
+    }
     
     public String getFirstName() {
         return firstName;
@@ -182,7 +191,8 @@ public class AccountInformation {
                 panNumber,
                 adhaarNumber,
                 accountType,
-                accountNumber        
+                accountNumber,
+                accountBalance
         );
     }
     
