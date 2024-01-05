@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -105,28 +106,30 @@ public class MySQLDatabase {
         }
     }
 
-    public void readData() throws SQLException {
-        String query = String.format("SELECT * FROM %s", tableName);
-        Formatter formatter = new Formatter();
+    public List<String> readData(String query, int columns) throws SQLException {
+//        String query = String.format("SELECT * FROM %s", tableName);
+//        Formatter formatter = new Formatter();
 
-        try (Statement st = con.createStatement(); 
-             ResultSet rs = st.executeQuery(query)) {
-
-            formatter.format("%-5s %-25s %-25s %-25s\n", "id", "name", "username", "password");
+        Statement st = con.createStatement(); 
+        ResultSet rs = st.executeQuery(query);
+        List<String> resultList = new ArrayList<>();
+//            formatter.format("%-5s %-25s %-25s %-25s\n", "id", "name", "username", "password");
 
         while(rs.next())
         {
-            int id = rs.getInt(1);
-            String name = rs.getString(2);
-            String username = rs.getString(3);
-            String password = rs.getString(4);
-            
-            formatter.format("%-5s %-25s %-25s %-25s\n", id,name,username, password);
+            for (int i = 1; i <= columns; i++) {
+                resultList.add(rs.getString(i));
+            }
+//            int id = rs.getInt(1);
+//            String name = rs.getString(2);
+//            String username = rs.getString(3);
+//            String password = rs.getString(4);
+//            
+//            formatter.format("%-5s %-25s %-25s %-25s\n", id,name,username, password);
 //            System.out.println(String.format("%d \t\t %s \t\t %s \t\t %s", id, name, username, password));
         }
-            System.out.println(formatter);
-
-        }
+//            System.out.println(formatter);
+        return resultList;
     }
     
     public void deleteData(int id) throws SQLException {

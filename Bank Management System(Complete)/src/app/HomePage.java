@@ -1,6 +1,7 @@
 package app;
 
 //new
+import MySQL.MySQLDatabase;
 import java.awt.BorderLayout;
 import java.awt.Color;
 //import java.awt.Dimension;
@@ -12,6 +13,10 @@ import java.awt.Insets;
 //import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -116,7 +121,7 @@ public class HomePage extends JFrame implements ActionListener{
         setResizable(false);
         setVisible(true);    
     }
-    public void ShowViewBalanceDialogue()
+    public void ShowViewBalanceDialogue(MySQLDatabase accountinfoTable)
         {
             JDialog d = new JDialog(this,"View Balance");
 //            d.setSize(500,350);
@@ -129,12 +134,29 @@ public class HomePage extends JFrame implements ActionListener{
             JTextField text_account = new JTextField(4);
             text_account.setFont(new Font("Raleway",Font.PLAIN,20));
             
-            JLabel balance_label = new JLabel("10,000");
+            JLabel balance_label = new JLabel();
             balance_label.setFont(new Font("Raleway",Font.BOLD,34));
             
             JButton submitButton = new JButton("SUBMIT");
             submitButton.setFont(new Font("Raleway",Font.PLAIN,20));
-            
+            submitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        List<String> resultList = accountinfoTable.readData("SELECT accountBalance"
+                                + " FROM accountinfo "
+                                + "WHERE accountNumber = '"
+                                + text_account.getText()+"'"
+                                ,1);
+                        
+//                        System.out.println(resultList);
+                        balance_label.setText(resultList.get(0));
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
             
             
             
@@ -199,9 +221,14 @@ public class HomePage extends JFrame implements ActionListener{
             JTextField text_amount = new JTextField(10);
             text_amount.setFont(new Font("Raleway",Font.PLAIN,20));
             
-            JButton submitButton = new JButton("DEPOSIT");
-            submitButton.setFont(new Font("Raleway",Font.PLAIN,20));
-            
+            JButton depositButton = new JButton("DEPOSIT");
+            depositButton.setFont(new Font("Raleway",Font.PLAIN,20));
+            depositButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("OK");
+                }
+            });
             
             
             
@@ -246,7 +273,7 @@ public class HomePage extends JFrame implements ActionListener{
             gbc.gridx = 0;
             gbc.gridy = 2;
             gbc.gridwidth = 2;
-            p.add(submitButton,gbc);
+            p.add(depositButton,gbc);
 
             d.add(p);
             d.pack();
@@ -353,6 +380,25 @@ public class HomePage extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
+            MySQL.MySQLDatabase accountinfoTable = new MySQLDatabase("accountinfo",
+                            "(firstname varchar(255), "
+                                    + "middlename varchar(255), "
+                                    + "lastname varchar(255), "
+                                    + "gender varchar(255), "
+                                    + "phone_number varchar(255), "
+                                    + "DOB varchar(255), "
+                                    + "email varchar(255), "
+                                    + "address varchar(255), "
+                                    + "state varchar(255), "
+                                    + "city varchar(255), "
+                                    + "religion varchar(255), "
+                                    + "category varchar(255), "
+                                    + "occupation varchar(255), "
+                                    + "panNumber varchar(255), "
+                                    + "adhaarNumber varchar(255), "
+                                    + "accountType varchar(255), "
+                                    + "accountNumber varchar(255),"
+                                    + "accountBalance varchar(255))");
             if(e.getSource() == add_account_button)
             {
                 this.dispose();
@@ -360,7 +406,7 @@ public class HomePage extends JFrame implements ActionListener{
             }
             if(e.getSource() == view_balance_button)
             {
-                this.ShowViewBalanceDialogue();
+                this.ShowViewBalanceDialogue(accountinfoTable);
             }
             if(e.getSource() == deposit_button)
             {
