@@ -142,6 +142,17 @@ public class MySQLDatabase {
             System.out.println(String.format("%d row(s) deleted sucessfully", count));
         }
     }
+    
+    public void updateData(String query, String updateVal) throws SQLException {
+//        String query = String.format("DELETE FROM %s WHERE id=?", tableName);
+        try (PreparedStatement p = con.prepareStatement(query)) {
+            p.setString(1, updateVal);
+            
+            int count = p.executeUpdate();
+            
+            System.out.println(String.format("%d row(s) updated sucessfully", count));
+        }
+    }
 
     public boolean validatePassword(String username, String password) throws SQLException {
         String query = "SELECT * FROM " + tableName + " " + "WHERE username=?";

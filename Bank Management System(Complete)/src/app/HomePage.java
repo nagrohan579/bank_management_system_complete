@@ -134,8 +134,9 @@ public class HomePage extends JFrame implements ActionListener{
             JTextField text_account = new JTextField(4);
             text_account.setFont(new Font("Raleway",Font.PLAIN,20));
             
-            JLabel balance_label = new JLabel();
+            JLabel balance_label = new JLabel("0");
             balance_label.setFont(new Font("Raleway",Font.BOLD,34));
+            balance_label.setForeground(new Color(238, 238, 238));
             
             JButton submitButton = new JButton("SUBMIT");
             submitButton.setFont(new Font("Raleway",Font.PLAIN,20));
@@ -150,6 +151,7 @@ public class HomePage extends JFrame implements ActionListener{
                                 ,1);
                         
 //                        System.out.println(resultList);
+                        balance_label.setForeground(Color.black);
                         balance_label.setText(resultList.get(0));
                         
                     } catch (SQLException ex) {
@@ -202,7 +204,7 @@ public class HomePage extends JFrame implements ActionListener{
             d.setVisible(true);
             
            }
-    public void ShowDepositButtonDialouge()
+    public void ShowDepositButtonDialouge(MySQLDatabase accountinfoTable)
     {
             JDialog d = new JDialog(this,"Deposit");
 //            d.setSize(500,350);
@@ -226,7 +228,22 @@ public class HomePage extends JFrame implements ActionListener{
             depositButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("OK");
+                    try {
+                        List<String> resultList = accountinfoTable.readData("SELECT accountBalance"
+                                + " FROM accountinfo "
+                                + "WHERE accountNumber = '"
+                                + text_account.getText()+"'"
+                                ,1);
+                    int prevBalance = Integer.parseInt(resultList.get(0));
+                    int incrementAmnt = Integer.parseInt(text_amount.getText());
+                    int newBalance = prevBalance + incrementAmnt;
+                    accountinfoTable.updateData("UPDATE accountinfo "
+                            + "SET accountBalance = "
+                            + newBalance
+                            + " WHERE accountNumber = ?", text_account.getText());
+                    } catch (NumberFormatException | SQLException E) {
+                        E.printStackTrace();
+                    }
                 }
             });
             
@@ -410,7 +427,7 @@ public class HomePage extends JFrame implements ActionListener{
             }
             if(e.getSource() == deposit_button)
             {
-                this.ShowDepositButtonDialouge();
+                this.ShowDepositButtonDialouge(accountinfoTable);
             }
             if(e.getSource() == money_transfer_button)
             {
