@@ -13,8 +13,11 @@ import java.awt.Insets;
 //import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //import javax.swing.BorderFactory;
@@ -22,6 +25,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -35,6 +39,8 @@ public class HomePage extends JFrame implements ActionListener{
     JButton money_transfer_button;
     JButton get_statement_button;
     JButton deposit_button;
+    MySQL.MySQLDatabase accountinfoTable;
+    Set<String> accNumberSet;
 
     public HomePage(){
         setTitle("Home");
@@ -119,8 +125,58 @@ public class HomePage extends JFrame implements ActionListener{
         setSize(850,480);
         setLocation(400,200);
         setResizable(false);
-        setVisible(true);    
+        setVisible(true);  
+        
+        try {
+            accountinfoTable = new MySQLDatabase("accountinfo",
+                    "(firstname varchar(255), "
+                            + "middlename varchar(255), "
+                            + "lastname varchar(255), "
+                            + "gender varchar(255), "
+                            + "phone_number varchar(255), "
+                            + "DOB varchar(255), "
+                            + "email varchar(255), "
+                            + "address varchar(255), "
+                            + "state varchar(255), "
+                            + "city varchar(255), "
+                            + "religion varchar(255), "
+                            + "category varchar(255), "
+                            + "occupation varchar(255), "
+                            + "panNumber varchar(255), "
+                            + "adhaarNumber varchar(255), "
+                            + "accountType varchar(255), "
+                            + "accountNumber varchar(255),"
+                            + "accountBalance varchar(255))");
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
+    public void setAccountNumbersHashSet()
+    {
+        String[] nameArr = User.name.split(" ");
+        String firstname = nameArr[0];
+        String lastname = nameArr[nameArr.length - 1];
+        List<String> accList = null;
+        try {
+            accList = accountinfoTable.readData("SELECT accountNumber "
+                    + "FROM accountinfo "
+                    + "WHERE firstname = \'"
+                    + firstname +"\'"
+                    +" AND lastname = \'"
+                    + lastname+"\'",1);
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        accNumberSet = new HashSet<String>(accList);
+        System.out.println(accNumberSet);
+    }
+    
     public void ShowViewBalanceDialogue(MySQLDatabase accountinfoTable)
         {
             JDialog d = new JDialog(this,"View Balance");
@@ -143,7 +199,9 @@ public class HomePage extends JFrame implements ActionListener{
             submitButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    try {
+                    if(accNumberSet.contains(text_account.getText()))
+                    {
+                       try {
                         List<String> resultList = accountinfoTable.readData("SELECT accountBalance"
                                 + " FROM accountinfo "
                                 + "WHERE accountNumber = '"
@@ -154,8 +212,16 @@ public class HomePage extends JFrame implements ActionListener{
                         balance_label.setForeground(Color.black);
                         balance_label.setText(resultList.get(0));
                         
-                    } catch (SQLException ex) {
-                        Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+                        } 
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, 
+                    "Invalid account number!", 
+                    "ERROR!", 
+                    JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
@@ -228,21 +294,33 @@ public class HomePage extends JFrame implements ActionListener{
             depositButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    try {
+                    if(accNumberSet.contains(text_account.getText()))
+                    {
+                        try {
                         List<String> resultList = accountinfoTable.readData("SELECT accountBalance"
                                 + " FROM accountinfo "
                                 + "WHERE accountNumber = '"
                                 + text_account.getText()+"'"
                                 ,1);
-                    int prevBalance = Integer.parseInt(resultList.get(0));
-                    int incrementAmnt = Integer.parseInt(text_amount.getText());
-                    int newBalance = prevBalance + incrementAmnt;
-                    accountinfoTable.updateData("UPDATE accountinfo "
-                            + "SET accountBalance = "
-                            + newBalance
-                            + " WHERE accountNumber = ?", text_account.getText());
-                    } catch (NumberFormatException | SQLException E) {
-                        E.printStackTrace();
+                        int prevBalance = Integer.parseInt(resultList.get(0));
+                        int incrementAmnt = Integer.parseInt(text_amount.getText());
+                        int newBalance = prevBalance + incrementAmnt;
+                        accountinfoTable.updateData("UPDATE accountinfo "
+                                + "SET accountBalance = "
+                                + newBalance
+                                + " WHERE accountNumber = ?", text_account.getText());
+
+                        d.dispose();
+                        } catch (NumberFormatException | SQLException E) {
+                            E.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, 
+                    "Invalid account number!", 
+                    "ERROR!", 
+                    JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
@@ -297,21 +375,21 @@ public class HomePage extends JFrame implements ActionListener{
             d.setLocationRelativeTo(null);
             d.setVisible(true);
     }
-    public void ShowMoneyTransferDialouge()
+    public void ShowMoneyTransferDialouge(MySQLDatabase accountinfoTable)
     {
             JDialog d = new JDialog(this,"Money Transfer");
 //            d.setSize(500,350);
 //            d.setVisible(true);
 //            d.setLocation(540,320);
                 
-            JLabel account_from_label = new JLabel("Account From. XXXX XXXX XXXX");
+            JLabel account_from_label = new JLabel("From Account: XXXX XXXX XXXX");
             account_from_label.setFont(new Font("AvantGrade",Font.BOLD,20));
             
             JTextField text_account_from = new JTextField(4);
             text_account_from.setFont(new Font("Raleway",Font.PLAIN,20));
             
             
-            JLabel account_to_label = new JLabel("Account to. XXXX XXXX XXXX");
+            JLabel account_to_label = new JLabel("To Account: XXXX XXXX XXXX");
             account_to_label.setFont(new Font("AvantGrade",Font.BOLD,20));
             
             JTextField text_account_to = new JTextField(4);
@@ -331,7 +409,56 @@ public class HomePage extends JFrame implements ActionListener{
             
             JButton submitButton = new JButton("TRANSFER");
             submitButton.setFont(new Font("Raleway",Font.PLAIN,20));
-            
+            submitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(accNumberSet.contains(text_account_from.getText()) 
+                            && !text_account_from.getText().equals(text_account_to.getText()))
+                    {
+                        try {
+                        List<String> resultList = accountinfoTable.readData("SELECT accountBalance"
+                                + " FROM accountinfo "
+                                + "WHERE accountNumber = '"
+                                + text_account_from.getText()+"'"
+                                ,1);
+                        
+                        int accFromCurrentBalance = Integer.parseInt(resultList.get(0));
+                        
+                        resultList = accountinfoTable.readData("SELECT accountBalance"
+                                + " FROM accountinfo "
+                                + "WHERE accountNumber = '"
+                                + text_account_to.getText()+"'"
+                                ,1);
+                        
+                            int accToCurrentBalance = Integer.parseInt(resultList.get(0));
+
+                            int accFromNewBalance = accFromCurrentBalance - Integer.parseInt(amount_text_field.getText());
+                            int accToNewBalance = accToCurrentBalance + Integer.parseInt(amount_text_field.getText());
+
+                            accountinfoTable.updateData("UPDATE accountinfo "
+                                + "SET accountBalance = "
+                                + accFromNewBalance
+                                + " WHERE accountNumber = ?", text_account_from.getText());
+
+                            accountinfoTable.updateData("UPDATE accountinfo "
+                                + "SET accountBalance = "
+                                + accToNewBalance
+                                + " WHERE accountNumber = ?", text_account_to.getText());
+
+                            d.dispose();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, 
+                    "Invalid account number!", 
+                    "ERROR!", 
+                    JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
             
             
             
@@ -396,26 +523,6 @@ public class HomePage extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        try{
-            MySQL.MySQLDatabase accountinfoTable = new MySQLDatabase("accountinfo",
-                            "(firstname varchar(255), "
-                                    + "middlename varchar(255), "
-                                    + "lastname varchar(255), "
-                                    + "gender varchar(255), "
-                                    + "phone_number varchar(255), "
-                                    + "DOB varchar(255), "
-                                    + "email varchar(255), "
-                                    + "address varchar(255), "
-                                    + "state varchar(255), "
-                                    + "city varchar(255), "
-                                    + "religion varchar(255), "
-                                    + "category varchar(255), "
-                                    + "occupation varchar(255), "
-                                    + "panNumber varchar(255), "
-                                    + "adhaarNumber varchar(255), "
-                                    + "accountType varchar(255), "
-                                    + "accountNumber varchar(255),"
-                                    + "accountBalance varchar(255))");
             if(e.getSource() == add_account_button)
             {
                 this.dispose();
@@ -424,19 +531,17 @@ public class HomePage extends JFrame implements ActionListener{
             if(e.getSource() == view_balance_button)
             {
                 this.ShowViewBalanceDialogue(accountinfoTable);
+                this.setAccountNumbersHashSet();
             }
             if(e.getSource() == deposit_button)
             {
                 this.ShowDepositButtonDialouge(accountinfoTable);
+                this.setAccountNumbersHashSet();
             }
             if(e.getSource() == money_transfer_button)
             {
-                this.ShowMoneyTransferDialouge();
+                this.ShowMoneyTransferDialouge(accountinfoTable);
+                this.setAccountNumbersHashSet();
             }
-            
-        }catch(Exception E)
-        {
-            E.printStackTrace();
-        }
     }
 }
