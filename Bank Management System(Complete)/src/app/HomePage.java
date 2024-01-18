@@ -34,7 +34,7 @@ import javax.swing.border.EmptyBorder;
 public class HomePage extends JFrame implements ActionListener{
     JPanel user_greeting_panel;
     JLabel name_label;
-    JButton logout;
+    JButton logout_button;
     JButton add_account_button;
     JButton view_balance_button;
     JButton money_transfer_button;
@@ -56,18 +56,18 @@ public class HomePage extends JFrame implements ActionListener{
 //        Border emptyBorder = new EmptyBorder(0, 10, 0, 70);
 //        name_label.setBorder(emptyBorder);
         
-        logout = new JButton("Logout");
-        logout.setFocusable(false);
+        logout_button = new JButton("Log out");
+        logout_button.setFocusable(false);
 //        logout.setPreferredSize(new Dimension(150,50));
-        logout.setBounds(120, 120, 180, 30);
-        logout.setFont(new Font("Arial",Font.BOLD,20));
+        logout_button.setBounds(120, 120, 180, 30);
+        logout_button.setFont(new Font("Arial",Font.BOLD,20));
         Border emptyBorder = new EmptyBorder(0, 10, 0, 30);
-        logout.setBorder(emptyBorder);
-        logout.setForeground(Color.WHITE);
+        logout_button.setBorder(emptyBorder);
+        logout_button.setForeground(Color.WHITE);
 //        logout.setBorder(BorderFactory.createLineBorder(Color.red));
-        logout.setBackground(new Color(12, 32, 3));
-        add(logout);
-        logout.addActionListener(this);
+        logout_button.setBackground(new Color(12, 32, 3));
+        add(logout_button);
+        logout_button.addActionListener(this);
         
         user_greeting_panel = new JPanel();
         //        user_greeting_panel.setPreferredSize(new Dimension(850, 80));
@@ -76,7 +76,7 @@ public class HomePage extends JFrame implements ActionListener{
         user_greeting_panel.setBackground(Color.black);
 //        user_details_panel.setBorder(BorderFactory.createLineBorder(Color.black));
         user_greeting_panel.add(name_label,BorderLayout.WEST);
-        user_greeting_panel.add(logout,BorderLayout.EAST);
+        user_greeting_panel.add(logout_button,BorderLayout.EAST);
 //        add(user_greeting_panel,BorderLayout.NORTH);
         add(user_greeting_panel);
         
@@ -542,6 +542,10 @@ public class HomePage extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == logout_button){
+                this.dispose();
+                new Login();
+            }
             if(e.getSource() == add_account_button)
             {
                 this.dispose();
