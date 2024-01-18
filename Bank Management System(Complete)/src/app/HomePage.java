@@ -174,7 +174,6 @@ public class HomePage extends JFrame implements ActionListener{
         }
         
         accNumberSet = new HashSet<String>(accList);
-        System.out.println(accNumberSet);
     }
     
     public void ShowViewBalanceDialogue(MySQLDatabase accountinfoTable)
@@ -416,20 +415,20 @@ public class HomePage extends JFrame implements ActionListener{
                             && !text_account_from.getText().equals(text_account_to.getText()))
                     {
                         try {
-                        List<String> resultList = accountinfoTable.readData("SELECT accountBalance"
-                                + " FROM accountinfo "
-                                + "WHERE accountNumber = '"
-                                + text_account_from.getText()+"'"
-                                ,1);
-                        
-                        int accFromCurrentBalance = Integer.parseInt(resultList.get(0));
-                        
-                        resultList = accountinfoTable.readData("SELECT accountBalance"
-                                + " FROM accountinfo "
-                                + "WHERE accountNumber = '"
-                                + text_account_to.getText()+"'"
-                                ,1);
-                        
+                            List<String> resultList = accountinfoTable.readData("SELECT accountBalance"
+                                    + " FROM accountinfo "
+                                    + "WHERE accountNumber = '"
+                                    + text_account_from.getText()+"'"
+                                    ,1);
+
+                            int accFromCurrentBalance = Integer.parseInt(resultList.get(0));
+
+                            resultList = accountinfoTable.readData("SELECT accountBalance"
+                                                                + " FROM accountinfo "
+                                                                + "WHERE accountNumber = '"
+                                                                + text_account_to.getText()+"'"
+                                                                ,1);
+                                                       
                             int accToCurrentBalance = Integer.parseInt(resultList.get(0));
 
                             int accFromNewBalance = accFromCurrentBalance - Integer.parseInt(amount_text_field.getText());
@@ -448,12 +447,17 @@ public class HomePage extends JFrame implements ActionListener{
                             d.dispose();
                         } catch (SQLException ex) {
                             Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch(IndexOutOfBoundsException ex){
+                            JOptionPane.showMessageDialog(null, 
+                            "Invalid reciever's account number!", 
+                            "ERROR!", 
+                            JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     else
                     {
                         JOptionPane.showMessageDialog(null, 
-                    "Invalid account number!", 
+                    "Your account number is invalid!", 
                     "ERROR!", 
                     JOptionPane.ERROR_MESSAGE);
                     }
